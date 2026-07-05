@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>月みくじ 〜月乃ミコの今日の占い〜</title>
+<title>月みくじ 〜宵乃こよみの今日の占い〜</title>
 </head>
 <body>
 <!-- ▼▼ ここから下をWordPressのカスタムHTMLブロックにそのまま貼れる構造 ▼▼ -->
@@ -14,8 +14,8 @@
   --ink:#e8e4d8; --sub:#9aa3bf; --accent:#c9536a;
   background:radial-gradient(1200px 600px at 70% -10%, #232c4d 0%, var(--indigo) 55%);
   color:var(--ink); font-family:"Yu Mincho","Hiragino Mincho ProN","MS PMincho",serif;
-  max-width:520px; margin:0 auto; padding:20px 14px 30px; border-radius:14px;
-  line-height:1.7; position:relative; overflow:hidden;
+  max-width:520px; margin:0 auto; padding:14px 14px 18px; border-radius:14px;
+  line-height:1.65; position:relative; overflow:hidden;
 }
 #tsukimikuji *{box-sizing:border-box; margin:0; padding:0;}
 #tsukimikuji .stars{position:absolute; inset:0; pointer-events:none; opacity:.55;
@@ -26,13 +26,13 @@
   radial-gradient(1.4px 1.4px at 90% 30%, #fff 50%, transparent 51%),
   radial-gradient(1px 1px at 22% 38%, #fff 50%, transparent 51%),
   radial-gradient(1.1px 1.1px at 68% 42%, #fff 50%, transparent 51%);}
-#tsukimikuji header{text-align:center; padding:6px 0 14px; position:relative;}
-#tsukimikuji .moon{font-size:34px; display:block; margin-bottom:2px;
+#tsukimikuji header{text-align:center; padding:2px 0 8px; position:relative;}
+#tsukimikuji .moon{font-size:28px; display:block; margin-bottom:2px;
   filter:drop-shadow(0 0 10px rgba(240,220,168,.7));}
-#tsukimikuji h1{font-size:26px; letter-spacing:.35em; color:var(--gold2); font-weight:600; text-indent:.35em;}
-#tsukimikuji .sub{font-size:12px; color:var(--sub); letter-spacing:.2em; margin-top:4px;}
-#tsukimikuji .date{font-size:13px; color:var(--gold); margin-top:8px; letter-spacing:.1em;}
-#tsukimikuji nav{display:flex; gap:8px; margin:14px 0 18px; position:relative;}
+#tsukimikuji h1{font-size:24px; letter-spacing:.35em; color:var(--gold2); font-weight:600; text-indent:.35em;}
+#tsukimikuji .sub{font-size:12px; color:var(--sub); letter-spacing:.2em; margin-top:2px;}
+#tsukimikuji .date{font-size:13px; color:var(--gold); margin-top:5px; letter-spacing:.1em;}
+#tsukimikuji nav{display:flex; gap:8px; margin:10px 0 12px; position:relative;}
 #tsukimikuji nav button{flex:1; padding:10px 4px; background:var(--indigo2); color:var(--sub);
   border:1px solid #2c3557; border-radius:10px; font-family:inherit; font-size:14px;
   letter-spacing:.15em; cursor:pointer; transition:.2s;}
@@ -42,7 +42,7 @@
 #tsukimikuji section.on{display:block; animation:tmk-fade .35s ease;}
 @keyframes tmk-fade{from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;}}
 #tsukimikuji .card{background:rgba(26,33,56,.85); border:1px solid #33406e;
-  border-radius:12px; padding:16px 15px; margin-bottom:12px;}
+  border-radius:12px; padding:14px 15px; margin-bottom:10px;}
 #tsukimikuji .card h2{font-size:15px; color:var(--gold); letter-spacing:.25em;
   border-bottom:1px solid #33406e; padding-bottom:8px; margin-bottom:10px; font-weight:600;}
 #tsukimikuji .big-btn{display:block; width:100%; padding:14px; font-size:16px; letter-spacing:.3em;
@@ -70,7 +70,7 @@
 #tsukimikuji .msg{margin-top:10px; font-size:14.5px; background:rgba(16,20,38,.6);
   border-left:3px solid var(--gold); padding:10px 12px; border-radius:0 8px 8px 0;}
 #tsukimikuji .tarot-row{display:flex; gap:10px; margin:12px 0;}
-#tsukimikuji .tcard{flex:1; aspect-ratio:2/3.2; border-radius:10px; border:1px solid var(--gold);
+#tsukimikuji .tcard{flex:1; aspect-ratio:2/2.8; border-radius:10px; border:1px solid var(--gold);
   background:linear-gradient(135deg,#232c4d 25%, #2f2440 75%); display:flex; flex-direction:column;
   align-items:center; justify-content:center; text-align:center; padding:6px; cursor:default;
   box-shadow:0 4px 14px rgba(0,0,0,.4);}
@@ -84,7 +84,7 @@
 #tsukimikuji .share{display:inline-block; margin-top:12px; padding:9px 18px; font-size:13px;
   color:var(--indigo); background:var(--gold2); border-radius:20px; text-decoration:none;
   letter-spacing:.1em; font-weight:600;}
-#tsukimikuji footer{margin-top:18px; text-align:center; font-size:11px; color:var(--sub);
+#tsukimikuji footer{margin-top:12px; text-align:center; font-size:11px; color:var(--sub);
   letter-spacing:.08em; position:relative;}
 #tsukimikuji .hidden{display:none;}
 @media (max-width:380px){ #tsukimikuji h1{font-size:22px;} #tsukimikuji .tcard .tname{font-size:13px;} }
@@ -94,7 +94,7 @@
 <header>
   <span class="moon">🌙</span>
   <h1>月みくじ</h1>
-  <div class="sub">〜 月乃ミコの今日の占い 〜</div>
+  <div class="sub">〜 宵乃こよみの今日の占い 〜</div>
   <div class="date" id="tmk-date"></div>
 </header>
 
@@ -137,7 +137,8 @@
 <section id="sec-tarot">
   <div class="card">
     <h2>タロット3枚引き</h2>
-    <p style="font-size:14px; margin-bottom:14px;">いま気になっていることを思い浮かべながら、カードをめくってみましょう。過去・現在・未来の流れを読みます。</p>
+    <p style="font-size:14px; margin-bottom:8px;">いま気になっていることを思い浮かべながら、カードをめくってみましょう。</p>
+    <p style="font-size:12.5px; color:var(--sub); margin-bottom:12px;">3枚の見方: <b style="color:var(--gold);">過去</b>=これまでの流れ ／ <b style="color:var(--gold);">現在</b>=いまの状況 ／ <b style="color:var(--gold);">未来</b>=このまま進んだ場合の行き先</p>
     <button class="big-btn" id="tarot-draw">カードをめくる</button>
     <div id="tarot-result" class="hidden">
       <div class="tarot-row" id="tarot-cards"></div>
@@ -361,16 +362,26 @@ document.getElementById("tarot-draw").addEventListener("click", function(){
     deck.splice(idx,1);
   }
   var cardsHtml = "", readHtml = "", shareNames = [];
+  var STORY = [
+    function(m){ return "これまでのあなたには「" + m + "」の流れがありました"; },
+    function(m){ return "いまのあなたは「" + m + "」のとき"; },
+    function(m){ return "このまま進むと「" + m + "」の流れがやってきそうです"; }
+  ];
   drawn.forEach(function(d, i){
     var dir = d.rev ? "逆位置" : "正位置";
     var meaning = d.rev ? d.card[3] : d.card[2];
     cardsHtml += '<div class="tcard"><span class="pos">' + POS[i] + '</span>' +
       '<span class="tsym"' + (d.rev ? ' style="display:inline-block; transform:rotate(180deg);"' : '') + '>' + d.card[1] + '</span>' +
       '<span class="tname">' + d.card[0] + '</span><span class="dir">' + dir + '</span></div>';
-    readHtml += '<p><b>' + POS[i] + '「' + d.card[0] + '（' + dir + '）」</b>… ' + meaning + '。</p>';
+    readHtml += '<p><b>' + POS[i] + '「' + d.card[0] + '（' + dir + '）」</b><br>' + STORY[i](meaning) + '。</p>';
     shareNames.push(POS[i] + ":" + d.card[0] + (d.rev ? "(逆)" : ""));
   });
-  readHtml += '<p style="color:var(--sub); font-size:13px;">カードはあくまで「見方のヒント」。気に入った読みだけ、そっと持ち帰ってくださいね。</p>';
+  var fut = drawn[2];
+  var futMeaning = fut.rev ? fut.card[3] : fut.card[2];
+  readHtml += '<div class="msg">' + (fut.rev
+    ? '🌙 今日のヒント: 未来のカードは逆位置でした。「' + futMeaning + '」に心当たりがあれば、今日は無理に進めず、少し立ち止まって整えるのが吉です。'
+    : '🌙 今日のヒント: 未来のカードが示す「' + futMeaning + '」を頭の片すみに置いて過ごすと、流れに乗りやすい日ですよ。') + '</div>';
+  readHtml += '<p style="color:var(--sub); font-size:12.5px; margin-top:8px;">カードはあくまで「見方のヒント」。ぴんと来た言葉だけ、そっと持ち帰ってくださいね。ぴんと来なければ引き直してもOKです。</p>';
   document.getElementById("tarot-cards").innerHTML = cardsHtml;
   document.getElementById("tarot-read").innerHTML = readHtml;
   var text = "タロット3枚引きの結果🌙 " + shareNames.join(" / ") + " #月みくじ #タロット";

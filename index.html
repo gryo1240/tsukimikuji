@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>月みくじ 〜月乃ミコの今日の占い〜</title>
+</head>
+<body>
+<!-- ▼▼ ここから下をWordPressのカスタムHTMLブロックにそのまま貼れる構造 ▼▼ -->
+<div id="tsukimikuji">
+<style>
+#tsukimikuji{
+  --indigo:#101426; --indigo2:#1a2138; --gold:#d9b96a; --gold2:#f0dca8;
+  --ink:#e8e4d8; --sub:#9aa3bf; --accent:#c9536a;
+  background:radial-gradient(1200px 600px at 70% -10%, #232c4d 0%, var(--indigo) 55%);
+  color:var(--ink); font-family:"Yu Mincho","Hiragino Mincho ProN","MS PMincho",serif;
+  max-width:520px; margin:0 auto; padding:20px 14px 30px; border-radius:14px;
+  line-height:1.7; position:relative; overflow:hidden;
+}
+#tsukimikuji *{box-sizing:border-box; margin:0; padding:0;}
+#tsukimikuji .stars{position:absolute; inset:0; pointer-events:none; opacity:.55;
+  background-image:radial-gradient(1.5px 1.5px at 12% 18%, #fff 50%, transparent 51%),
+  radial-gradient(1px 1px at 32% 8%, #fff 50%, transparent 51%),
+  radial-gradient(1.2px 1.2px at 55% 22%, #fff 50%, transparent 51%),
+  radial-gradient(1px 1px at 78% 12%, #fff 50%, transparent 51%),
+  radial-gradient(1.4px 1.4px at 90% 30%, #fff 50%, transparent 51%),
+  radial-gradient(1px 1px at 22% 38%, #fff 50%, transparent 51%),
+  radial-gradient(1.1px 1.1px at 68% 42%, #fff 50%, transparent 51%);}
+#tsukimikuji header{text-align:center; padding:6px 0 14px; position:relative;}
+#tsukimikuji .moon{font-size:34px; display:block; margin-bottom:2px;
+  filter:drop-shadow(0 0 10px rgba(240,220,168,.7));}
+#tsukimikuji h1{font-size:26px; letter-spacing:.35em; color:var(--gold2); font-weight:600; text-indent:.35em;}
+#tsukimikuji .sub{font-size:12px; color:var(--sub); letter-spacing:.2em; margin-top:4px;}
+#tsukimikuji .date{font-size:13px; color:var(--gold); margin-top:8px; letter-spacing:.1em;}
+#tsukimikuji nav{display:flex; gap:8px; margin:14px 0 18px; position:relative;}
+#tsukimikuji nav button{flex:1; padding:10px 4px; background:var(--indigo2); color:var(--sub);
+  border:1px solid #2c3557; border-radius:10px; font-family:inherit; font-size:14px;
+  letter-spacing:.15em; cursor:pointer; transition:.2s;}
+#tsukimikuji nav button.on{background:linear-gradient(180deg,#33406e,#232c4d);
+  color:var(--gold2); border-color:var(--gold); box-shadow:0 0 12px rgba(217,185,106,.25);}
+#tsukimikuji section{display:none; position:relative;}
+#tsukimikuji section.on{display:block; animation:tmk-fade .35s ease;}
+@keyframes tmk-fade{from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;}}
+#tsukimikuji .card{background:rgba(26,33,56,.85); border:1px solid #33406e;
+  border-radius:12px; padding:16px 15px; margin-bottom:12px;}
+#tsukimikuji .card h2{font-size:15px; color:var(--gold); letter-spacing:.25em;
+  border-bottom:1px solid #33406e; padding-bottom:8px; margin-bottom:10px; font-weight:600;}
+#tsukimikuji .big-btn{display:block; width:100%; padding:14px; font-size:16px; letter-spacing:.3em;
+  background:linear-gradient(180deg,#3a2f4f,#2a2240); color:var(--gold2);
+  border:1px solid var(--gold); border-radius:12px; font-family:inherit; cursor:pointer;
+  box-shadow:0 0 14px rgba(217,185,106,.2); transition:.2s;}
+#tsukimikuji .big-btn:active{transform:scale(.98);}
+#tsukimikuji .grade{font-size:44px; text-align:center; color:var(--gold2); letter-spacing:.2em;
+  text-shadow:0 0 18px rgba(240,220,168,.5); margin:6px 0 2px;}
+#tsukimikuji .grade-note{text-align:center; font-size:12px; color:var(--sub); margin-bottom:10px;}
+#tsukimikuji dl.omi{display:grid; grid-template-columns:5.2em 1fr; gap:6px 10px; font-size:14px;}
+#tsukimikuji dl.omi dt{color:var(--gold); letter-spacing:.1em;}
+#tsukimikuji select{width:100%; padding:11px 10px; font-size:15px; font-family:inherit;
+  background:var(--indigo2); color:var(--ink); border:1px solid #33406e; border-radius:10px;}
+#tsukimikuji .seiza-head{display:flex; align-items:baseline; gap:10px; margin-bottom:8px;}
+#tsukimikuji .seiza-head .name{font-size:22px; color:var(--gold2); letter-spacing:.15em;}
+#tsukimikuji .seiza-head .rank{font-size:13px; color:var(--accent); border:1px solid var(--accent);
+  border-radius:20px; padding:1px 10px;}
+#tsukimikuji table.stars-tbl{width:100%; font-size:14px; border-collapse:collapse;}
+#tsukimikuji table.stars-tbl td{padding:5px 0; border-bottom:1px dashed #2c3557;}
+#tsukimikuji table.stars-tbl td:first-child{color:var(--sub); width:5em; letter-spacing:.15em;}
+#tsukimikuji .star-on{color:var(--gold2);} #tsukimikuji .star-off{color:#3a4468;}
+#tsukimikuji .lucky{font-size:13.5px; margin-top:10px; color:var(--ink);}
+#tsukimikuji .lucky b{color:var(--gold);}
+#tsukimikuji .msg{margin-top:10px; font-size:14.5px; background:rgba(16,20,38,.6);
+  border-left:3px solid var(--gold); padding:10px 12px; border-radius:0 8px 8px 0;}
+#tsukimikuji .tarot-row{display:flex; gap:10px; margin:12px 0;}
+#tsukimikuji .tcard{flex:1; aspect-ratio:2/3.2; border-radius:10px; border:1px solid var(--gold);
+  background:linear-gradient(135deg,#232c4d 25%, #2f2440 75%); display:flex; flex-direction:column;
+  align-items:center; justify-content:center; text-align:center; padding:6px; cursor:default;
+  box-shadow:0 4px 14px rgba(0,0,0,.4);}
+#tsukimikuji .tcard .pos{font-size:11px; color:var(--sub); letter-spacing:.2em;}
+#tsukimikuji .tcard .tname{font-size:15px; color:var(--gold2); margin:6px 0 2px; letter-spacing:.05em;}
+#tsukimikuji .tcard .dir{font-size:11px; color:var(--accent);}
+#tsukimikuji .tcard .tsym{font-size:26px; margin-top:4px;}
+#tsukimikuji .tarot-read{font-size:14px;}
+#tsukimikuji .tarot-read p{margin-bottom:8px;}
+#tsukimikuji .tarot-read b{color:var(--gold);}
+#tsukimikuji .share{display:inline-block; margin-top:12px; padding:9px 18px; font-size:13px;
+  color:var(--indigo); background:var(--gold2); border-radius:20px; text-decoration:none;
+  letter-spacing:.1em; font-weight:600;}
+#tsukimikuji footer{margin-top:18px; text-align:center; font-size:11px; color:var(--sub);
+  letter-spacing:.08em; position:relative;}
+#tsukimikuji .hidden{display:none;}
+@media (max-width:380px){ #tsukimikuji h1{font-size:22px;} #tsukimikuji .tcard .tname{font-size:13px;} }
+</style>
+
+<div class="stars"></div>
+<header>
+  <span class="moon">🌙</span>
+  <h1>月みくじ</h1>
+  <div class="sub">〜 月乃ミコの今日の占い 〜</div>
+  <div class="date" id="tmk-date"></div>
+</header>
+
+<nav>
+  <button id="tab-omikuji" class="on">おみくじ</button>
+  <button id="tab-seiza">12星座</button>
+  <button id="tab-tarot">タロット</button>
+</nav>
+
+<section id="sec-omikuji" class="on">
+  <div class="card">
+    <h2>今日のおみくじ</h2>
+    <div id="omikuji-intro">
+      <p style="font-size:14px; margin-bottom:14px;">ようこそお参りくださいました。心を静めて、今日の一枚を引いてみましょう。<br><span style="color:var(--sub); font-size:12.5px;">（おみくじは1日に1回。日付が変わると新しく引けます）</span></p>
+      <button class="big-btn" id="omikuji-draw">おみくじを引く</button>
+    </div>
+    <div id="omikuji-result" class="hidden">
+      <div class="grade" id="omi-grade"></div>
+      <div class="grade-note">今日のあなたの運勢</div>
+      <dl class="omi">
+        <dt>願いごと</dt><dd id="omi-wish"></dd>
+        <dt>恋愛</dt><dd id="omi-love"></dd>
+        <dt>学び・仕事</dt><dd id="omi-work"></dd>
+        <dt>健康</dt><dd id="omi-health"></dd>
+      </dl>
+      <div class="msg" id="omi-msg"></div>
+      <a class="share" id="omi-share" target="_blank" rel="noopener">結果をXでシェア</a>
+    </div>
+  </div>
+</section>
+
+<section id="sec-seiza">
+  <div class="card">
+    <h2>12星座 今日の運勢</h2>
+    <select id="seiza-select"></select>
+    <div id="seiza-result" style="margin-top:14px;"></div>
+  </div>
+</section>
+
+<section id="sec-tarot">
+  <div class="card">
+    <h2>タロット3枚引き</h2>
+    <p style="font-size:14px; margin-bottom:14px;">いま気になっていることを思い浮かべながら、カードをめくってみましょう。過去・現在・未来の流れを読みます。</p>
+    <button class="big-btn" id="tarot-draw">カードをめくる</button>
+    <div id="tarot-result" class="hidden">
+      <div class="tarot-row" id="tarot-cards"></div>
+      <div class="tarot-read" id="tarot-read"></div>
+      <a class="share" id="tarot-share" target="_blank" rel="noopener">結果をXでシェア</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  🌙 月みくじは娯楽(エンターテインメント)としてお楽しみください。<br>
+  結果は行動を縛るものではなく、今日を心地よく過ごすためのヒントです。
+</footer>
+
+<script>
+(function(){
+"use strict";
+
+/* ---------- 共通: 日付とハッシュ(FNV-1a 32bit / UTF-8) ---------- */
+var now = new Date();
+var dateStr = now.getFullYear() + "-" + String(now.getMonth()+1).padStart(2,"0") + "-" + String(now.getDate()).padStart(2,"0");
+var dateJp = now.getFullYear() + "年" + (now.getMonth()+1) + "月" + now.getDate() + "日";
+document.getElementById("tmk-date").textContent = dateJp + " の運勢";
+
+var enc = new TextEncoder();
+function fnv(str){
+  var h = 2166136261 >>> 0;
+  var bytes = enc.encode(str);
+  for (var i=0; i<bytes.length; i++){
+    h = (h ^ bytes[i]) >>> 0;
+    h = Math.imul(h, 16777619) >>> 0;
+  }
+  return h >>> 0;
+}
+function pick(arr, h){ return arr[h % arr.length]; }
+
+/* ---------- タブ切替 ---------- */
+var tabs = {omikuji:"tab-omikuji", seiza:"tab-seiza", tarot:"tab-tarot"};
+Object.keys(tabs).forEach(function(key){
+  document.getElementById(tabs[key]).addEventListener("click", function(){
+    Object.keys(tabs).forEach(function(k){
+      document.getElementById(tabs[k]).classList.toggle("on", k===key);
+      document.getElementById("sec-"+k).classList.toggle("on", k===key);
+    });
+  });
+});
+
+/* ---------- ① おみくじ(端末ごとに1日固定) ---------- */
+var GRADES = ["大吉","吉","中吉","小吉","末吉","凶"];
+var WEIGHTS = [14,22,20,18,16,10]; // 合計100
+var OMI = {
+  "大吉":{wish:["望みのまま、まっすぐ進んでよい日です","思い切って口に出すと叶いやすい日"],
+    love:["素直なひとことが距離をぐっと縮めます","笑顔が最高のお守りになります"],
+    work:["集中力が冴える日。難しい課題は午前中に","挑戦が評価につながります"],
+    health:["体が軽い日。少し歩くとさらに運が巡ります","早寝でこの好調が明日も続きます"],
+    msg:["月が満ちるように、あなたの努力が実を結ぶとき。おごらず、まわりへの感謝をひとつ言葉にすると、この運はさらに長続きしますよ。"]},
+  "吉":{wish:["焦らなければ良い方向へ進みます","半歩先の目標がちょうどよい日"],
+    love:["聞き役にまわると好印象です","小さな気配りが伝わる日"],
+    work:["段取りを整えると午後が楽になります","確認をていねいに。それだけで十分"],
+    health:["水分をこまめに。調子は上向きです","肩の力を抜くと集中が戻ります"],
+    msg:["静かな追い風が吹いています。大きく飛ぶより、今日は一歩一歩を確かめて。夜、今日良かったことを3つ思い出すと運が定着します。"]},
+  "中吉":{wish:["準備した分だけ届く日です","欲張らなければ穏やかに叶います"],
+    love:["共通の話題がご縁を運びます","急がず、相手のペースに合わせて"],
+    work:["コツコツ型の作業が捗ります","後回しの用事をひとつ片づけると吉"],
+    health:["首・肩を回してひと休みを","温かい飲み物が味方になります"],
+    msg:["月の光のように、派手ではないけれど確かな運気です。目の前のことをていねいに。小さな「できた」を積むほど、明日が明るくなります。"]},
+  "小吉":{wish:["小さな願いから叶っていきます","身近なところに幸運のたねが"],
+    love:["挨拶+ひとことを心がけて","焦りは禁物。今日は種まきの日"],
+    work:["ミスの見直しが幸運を呼びます","メモを取ると流れが良くなります"],
+    health:["夜ふかしは控えめに","深呼吸を3回、気分が変わります"],
+    msg:["足元に小さな幸せが落ちている日。遠くを見すぎず、近くの人や物を大切に。整理整頓をすると運気の通り道ができますよ。"]},
+  "末吉":{wish:["時間はかかりますが、方向は正しいです","今日は土台づくりに向いた日"],
+    love:["結論を急がないで。見守る優しさを","自分磨きがいちばんの近道です"],
+    work:["無理な引き受けは控えめに","確認と報告、基本が身を守ります"],
+    health:["休むことも立派な予定です","湯船にゆっくり浸かると回復します"],
+    msg:["まだ月が細い夜。でも、月は必ず満ちていきます。今日は結果よりも準備の日と割り切って。ゆっくり休むことが、明日の運を育てます。"]},
+  "凶":{wish:["今日は守りの日。現状維持で十分です","判断は明日に回して大丈夫"],
+    love:["余計なひとことにご用心","返信を急がず、一呼吸おいて"],
+    work:["ダブルチェックが災いを防ぎます","大きな決断・大きな買い物は避けて"],
+    health:["早めの休息がいちばんの開運です","無理をしない勇気を持って"],
+    msg:["雲が月を隠す夜もあります。でも月が消えたわけではありません。今日は慎重に、静かに過ごすが勝ち。丁寧に過ごせた時点で、あなたの勝ちです。"]}
+};
+function gradeFromHash(h){
+  var v = h % 100, acc = 0;
+  for (var i=0; i<GRADES.length; i++){ acc += WEIGHTS[i]; if (v < acc) return GRADES[i]; }
+  return "吉";
+}
+var uidKey = "tsukimikuji-uid";
+var uid;
+try {
+  uid = localStorage.getItem(uidKey);
+  if (!uid){ uid = String(Math.floor(Math.random()*1e9)); localStorage.setItem(uidKey, uid); }
+} catch(e){ uid = "guest"; }
+
+function showOmikuji(){
+  var base = dateStr + "|omikuji|" + uid;
+  var grade = gradeFromHash(fnv(base));
+  var t = OMI[grade];
+  document.getElementById("omi-grade").textContent = grade;
+  document.getElementById("omi-wish").textContent = pick(t.wish, fnv(base+"|w"));
+  document.getElementById("omi-love").textContent = pick(t.love, fnv(base+"|l"));
+  document.getElementById("omi-work").textContent = pick(t.work, fnv(base+"|k"));
+  document.getElementById("omi-health").textContent = pick(t.health, fnv(base+"|h"));
+  document.getElementById("omi-msg").textContent = t.msg[0];
+  var text = "今日のおみくじは【" + grade + "】でした🌙 #月みくじ #今日の運勢";
+  document.getElementById("omi-share").href = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(text);
+  document.getElementById("omikuji-intro").classList.add("hidden");
+  document.getElementById("omikuji-result").classList.remove("hidden");
+}
+document.getElementById("omikuji-draw").addEventListener("click", showOmikuji);
+try {
+  if (localStorage.getItem("tsukimikuji-omi-date") === dateStr) showOmikuji();
+  document.getElementById("omikuji-draw").addEventListener("click", function(){
+    localStorage.setItem("tsukimikuji-omi-date", dateStr);
+  });
+} catch(e){}
+
+/* ---------- ② 12星座(SNS投稿生成ツールと同一アルゴリズム) ---------- */
+var SIGNS = [
+  ["おひつじ座","3/21-4/19"],["おうし座","4/20-5/20"],["ふたご座","5/21-6/21"],
+  ["かに座","6/22-7/22"],["しし座","7/23-8/22"],["おとめ座","8/23-9/22"],
+  ["てんびん座","9/23-10/23"],["さそり座","10/24-11/22"],["いて座","11/23-12/21"],
+  ["やぎ座","12/22-1/19"],["みずがめ座","1/20-2/18"],["うお座","2/19-3/20"]
+];
+var COLORS = ["藍色","金色","桜色","若草色","山吹色","瑠璃色","茜色","銀色","白","紫","水色","橙色"];
+var ITEMS = ["お茶","ハンカチ","本","音楽","和菓子","ノート","観葉植物","靴","マグカップ","写真","キーホルダー","傘","文房具","窓辺","散歩道","手紙"];
+var SEIZA_MSG = [
+  ["今日は無理をしない日。ひと休みが明日の追い風になります。","判断は急がず、いったん寝かせて正解の日です。"],
+  ["小さなつまずきも学びに変わる日。深呼吸を忘れずに。","足元を整えるほど運が安定します。整理整頓が吉。"],
+  ["平常運転が何よりの強み。いつも通りがいちばん良い日です。","身近な人との何気ない会話に、ヒントが隠れています。"],
+  ["ゆるやかな上昇気流。気になっていたことに一歩踏み出して。","あなたの気配りが、思わぬ形で返ってくる日です。"],
+  ["絶好調の予感。新しいことを始めるのに向いた日です。","あなたの笑顔が場の空気を変えます。主役の一日に。"]
+];
+function seizaFortune(sign){
+  var base = dateStr + "|" + sign;
+  var score = fnv(base + "|total") % 1000;
+  return {
+    score: score,
+    total: 1 + Math.floor(score/200),
+    love: 1 + fnv(base + "|love") % 5,
+    work: 1 + fnv(base + "|work") % 5,
+    money: 1 + fnv(base + "|money") % 5,
+    color: pick(COLORS, fnv(base + "|color")),
+    item: pick(ITEMS, fnv(base + "|item")),
+    msg: pick(SEIZA_MSG[Math.floor(score/200)], fnv(base + "|msg"))
+  };
+}
+function starHtml(n){
+  var s = "";
+  for (var i=1; i<=5; i++) s += '<span class="' + (i<=n ? "star-on" : "star-off") + '">★</span>';
+  return s;
+}
+var ranking = SIGNS.map(function(s){ return {name:s[0], f:seizaFortune(s[0])}; })
+  .sort(function(a,b){ return b.f.score - a.f.score; });
+var rankOf = {};
+ranking.forEach(function(r, i){ rankOf[r.name] = i+1; });
+
+var sel = document.getElementById("seiza-select");
+SIGNS.forEach(function(s, i){
+  var op = document.createElement("option");
+  op.value = s[0]; op.textContent = s[0] + "（" + s[1] + "生まれ）";
+  sel.appendChild(op);
+});
+function renderSeiza(){
+  var sign = sel.value;
+  var f = seizaFortune(sign);
+  var text = dateJp + "の" + sign + "は12星座中" + rankOf[sign] + "位、総合" + f.total + "つ星でした🌙 #月みくじ #今日の運勢";
+  document.getElementById("seiza-result").innerHTML =
+    '<div class="seiza-head"><span class="name">' + sign + '</span>' +
+    '<span class="rank">12星座中 ' + rankOf[sign] + '位</span></div>' +
+    '<table class="stars-tbl">' +
+    '<tr><td>総合運</td><td>' + starHtml(f.total) + '</td></tr>' +
+    '<tr><td>恋愛運</td><td>' + starHtml(f.love) + '</td></tr>' +
+    '<tr><td>仕事・学業</td><td>' + starHtml(f.work) + '</td></tr>' +
+    '<tr><td>金運</td><td>' + starHtml(f.money) + '</td></tr>' +
+    '</table>' +
+    '<div class="lucky">ラッキーカラー: <b>' + f.color + '</b> ／ ラッキーアイテム: <b>' + f.item + '</b></div>' +
+    '<div class="msg">' + f.msg + '</div>' +
+    '<a class="share" target="_blank" rel="noopener" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '">結果をXでシェア</a>';
+}
+sel.addEventListener("change", renderSeiza);
+try {
+  var savedSign = localStorage.getItem("tsukimikuji-sign");
+  if (savedSign) sel.value = savedSign;
+  sel.addEventListener("change", function(){ localStorage.setItem("tsukimikuji-sign", sel.value); });
+} catch(e){}
+renderSeiza();
+
+/* ---------- ③ タロット3枚引き ---------- */
+var TAROT = [
+  ["愚者","🃏","自由な一歩、新しい旅立ち","無計画、足踏み"],
+  ["魔術師","✨","創造力が湧く、良いスタート","空回り、準備不足"],
+  ["女教皇","📖","直感が冴える、静かな学び","考えすぎ、神経質"],
+  ["女帝","🌹","豊かさ、実り、包容力","甘え、停滞"],
+  ["皇帝","👑","安定、責任、リーダーシップ","頑固、支配的"],
+  ["法王","🕊","助言に恵まれる、信頼","形式にとらわれる"],
+  ["恋人","💞","ご縁、心が通う選択","迷い、優柔不断"],
+  ["戦車","🛞","前進、勝利、勢いに乗る","暴走、焦り"],
+  ["力","🦁","粘り強さ、静かな勇気","力み、自信のゆらぎ"],
+  ["隠者","🏮","内省、答えは自分の中に","孤立、閉じこもり"],
+  ["運命の輪","🎡","転機、チャンスの到来","タイミングのずれ"],
+  ["正義","⚖","バランス、公平な判断","偏り、白黒つけすぎ"],
+  ["吊るされた男","🔗","視点を変える、実りある我慢","徒労感、身動きの取れなさ"],
+  ["死神","🌑","区切り、生まれ変わり","過去への執着"],
+  ["節制","🫖","調和、ほどよさ、回復","不摂生、アンバランス"],
+  ["悪魔","🕯","誘惑、断ち切りたい習慣","惰性、依存"],
+  ["塔","🌩","突然の変化、気づき","動揺、見て見ぬふり"],
+  ["星","⭐","希望、ひらめき、癒し","理想が先走る"],
+  ["月","🌙","不安の正体を見つめる、感受性","思い込み、心配しすぎ"],
+  ["太陽","🌞","成功、素直な喜び、活力","出し惜しみ、照れ"],
+  ["審判","🎺","復活、再挑戦のとき","過去への未練"],
+  ["世界","🌏","完成、達成、ひと区切り","あと一歩、詰めの甘さ"]
+];
+var POS = ["過去","現在","未来"];
+document.getElementById("tarot-draw").addEventListener("click", function(){
+  var deck = TAROT.map(function(_, i){ return i; });
+  var drawn = [];
+  for (var i=0; i<3; i++){
+    var idx = Math.floor(Math.random()*deck.length);
+    drawn.push({card:TAROT[deck[idx]], rev:Math.random()<0.4});
+    deck.splice(idx,1);
+  }
+  var cardsHtml = "", readHtml = "", shareNames = [];
+  drawn.forEach(function(d, i){
+    var dir = d.rev ? "逆位置" : "正位置";
+    var meaning = d.rev ? d.card[3] : d.card[2];
+    cardsHtml += '<div class="tcard"><span class="pos">' + POS[i] + '</span>' +
+      '<span class="tsym"' + (d.rev ? ' style="display:inline-block; transform:rotate(180deg);"' : '') + '>' + d.card[1] + '</span>' +
+      '<span class="tname">' + d.card[0] + '</span><span class="dir">' + dir + '</span></div>';
+    readHtml += '<p><b>' + POS[i] + '「' + d.card[0] + '（' + dir + '）」</b>… ' + meaning + '。</p>';
+    shareNames.push(POS[i] + ":" + d.card[0] + (d.rev ? "(逆)" : ""));
+  });
+  readHtml += '<p style="color:var(--sub); font-size:13px;">カードはあくまで「見方のヒント」。気に入った読みだけ、そっと持ち帰ってくださいね。</p>';
+  document.getElementById("tarot-cards").innerHTML = cardsHtml;
+  document.getElementById("tarot-read").innerHTML = readHtml;
+  var text = "タロット3枚引きの結果🌙 " + shareNames.join(" / ") + " #月みくじ #タロット";
+  document.getElementById("tarot-share").href = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(text);
+  document.getElementById("tarot-result").classList.remove("hidden");
+  document.getElementById("tarot-draw").textContent = "もう一度めくる";
+});
+
+})();
+</script>
+</div>
+<!-- ▲▲ WordPress貼り付け範囲ここまで ▲▲ -->
+</body>
+</html>

@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>月みくじ 〜宵乃こよみの今日の占い〜</title>
+<script src="jp-phrase-1.js" defer></script>
 </head>
 <body style="margin:0; padding:10px 0 24px; background:#0c0f1d;">
 <!-- ▼▼ ここから下をWordPressのカスタムHTMLブロックにそのまま貼れる構造 ▼▼ -->
@@ -176,6 +177,10 @@
 #tsukimikuji .share:hover{background:rgba(217,185,106,.12);}
 #tsukimikuji footer{margin-top:14px; text-align:center; font-size:11px; color:var(--sub);
   letter-spacing:.08em; position:relative; border-top:1px solid rgba(217,185,106,.18); padding-top:10px;}
+/* 狭い画面: 文節で改行すると文が1行ずつ増えるので、行間とタロットのカードの高さで吸収して埋め込み枠(960px)を守る（2026-09-27） */
+@media (max-width:410px){ #tsukimikuji{line-height:1.6;} #tsukimikuji .tcard{aspect-ratio:2/2.7;} }
+@media (max-width:320px){ #tsukimikuji{line-height:1.55;} }
+@media (max-width:310px){ #tsukimikuji header{height:148px;} #tsukimikuji .tcard{aspect-ratio:2/2.55;} }
 @media (max-width:380px){ #tsukimikuji h1{font-size:40px;} #tsukimikuji .tcard .tname{font-size:13px;} #tsukimikuji .tcard .rn{font-size:25px;}
   #tsukimikuji .grade{font-size:56px;} }
 /* 動きを減らす設定: 揺れ・めくり・雲の流れは止め、現れ方は短いフェードに置き換える（結果は必ず見える） */
@@ -236,7 +241,7 @@
     <div id="omikuji-result" class="hidden">
       <div class="slip" id="tmk-slip">
         <div class="slip-head"><span>月みくじ</span><span id="tmk-no"></span></div>
-        <span class="slip-seal" aria-hidden="true">宵乃</span>
+        <span class="slip-seal" aria-hidden="true" data-nophrase>宵乃</span>
         <div class="grade" id="omi-grade"></div>
         <div class="grade-note">今日のあなたの運勢</div>
         <dl class="omi">
